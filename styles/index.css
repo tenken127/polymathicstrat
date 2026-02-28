@@ -12,8 +12,8 @@
   --bg-glass: rgba(10, 14, 27, 0.7);
 
   --text-primary: #f0f2f8;
-  --text-secondary: rgba(200, 210, 240, 0.7);
-  --text-muted: rgba(160, 175, 220, 0.5);
+  --text-secondary: rgba(210, 218, 245, 0.85);
+  --text-muted: rgba(175, 190, 230, 0.65);
 
   --accent-blue: #3b3ef5;
   --accent-purple: #7c7cfa;
@@ -765,13 +765,13 @@ img {
 
 .industry-desc {
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: rgba(220, 225, 248, 0.9);
   margin-bottom: var(--space-sm);
 }
 
 .industry-meta {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: rgba(195, 205, 240, 0.75);
   line-height: 1.5;
 }
 
