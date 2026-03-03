@@ -866,6 +866,40 @@ img {
   margin-bottom: var(--space-lg);
 }
 
+.founder-profile {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+}
+
+.founder-image-wrapper {
+  flex-shrink: 0;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+  box-shadow: 0 0 30px rgba(123, 124, 250, 0.2);
+}
+
+.founder-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .founder-profile {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
 .about-tech-stack {
   display: flex;
   flex-wrap: wrap;
