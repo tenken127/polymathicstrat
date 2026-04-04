@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initSmoothScroll();
     initCounters();
+    initCalculator();
 });
 
 // ---------- Scroll Animations (Intersection Observer) ----------
@@ -130,4 +131,85 @@ function animateCounter(el, target) {
     }
 
     requestAnimationFrame(update);
+}
+
+// ---------- Revenue Calculator ----------
+function initCalculator() {
+    const sliderMissed = document.getElementById('slider-missed');
+    const sliderConvert = document.getElementById('slider-convert');
+    const sliderPrice = document.getElementById('slider-price');
+    
+    const valMissed = document.getElementById('val-missed');
+    const valConvert = document.getElementById('val-convert');
+    const valPrice = document.getElementById('val-price');
+    
+    const toggleBtns = document.querySelectorAll('.calc-toggle');
+    const resultPeriodLabel = document.getElementById('result-period-label');
+    const resultAmount = document.getElementById('result-amount');
+    const resultSubtext = document.getElementById('result-subtext');
+    
+    if(!sliderMissed) return; // Calculator not on page
+    
+    let currentPeriod = 'Monthly'; // Daily, Weekly, Monthly, Annually
+    const daysMultiplier = {
+        'Daily': 1,
+        'Weekly': 7,
+        'Monthly': 30, // As explicitly agreed by user
+        'Annually': 365
+    };
+    
+    function updateCalculator() {
+        const missedVal = parseInt(sliderMissed.value, 10);
+        const convertVal = parseInt(sliderConvert.value, 10);
+        const priceVal = parseInt(sliderPrice.value, 10);
+        
+        // Update labels
+        valMissed.textContent = missedVal;
+        valConvert.textContent = convertVal + '%';
+        valPrice.textContent = '$' + priceVal.toLocaleString();
+        
+        // Update slider colors (CSS gradient from accent to subtle border)
+        updateSliderFill(sliderMissed);
+        updateSliderFill(sliderConvert);
+        updateSliderFill(sliderPrice);
+        
+        // Compute loss
+        const multiplier = daysMultiplier[currentPeriod];
+        const totalMissedInPeriod = missedVal * multiplier;
+        
+        // Round up the DAILY missed customers since you cannot have half a customer
+        const dailyLostCustomers = Math.ceil(missedVal * (convertVal / 100.0));
+        const totalLoss = dailyLostCustomers * multiplier * priceVal;
+        
+        // Render results
+        resultPeriodLabel.textContent = currentPeriod;
+        
+        // Animate or set amount
+        resultAmount.textContent = '$' + totalLoss.toLocaleString('en-US', {maximumFractionDigits: 0});
+        resultSubtext.textContent = `That's ${totalMissedInPeriod.toLocaleString()} missed calls per ${currentPeriod.toLowerCase()}`;
+    }
+    
+    function updateSliderFill(slider) {
+        const value = (slider.value - slider.min) / (slider.max - slider.min) * 100;
+        // Background linear-gradient to fill track
+        slider.style.background = `linear-gradient(to right, var(--accent-blue) ${value}%, var(--border-subtle) ${value}%)`;
+    }
+    
+    // Add event listeners to sliders
+    [sliderMissed, sliderConvert, sliderPrice].forEach(slider => {
+        slider.addEventListener('input', updateCalculator);
+    });
+    
+    // Add event listeners to toggles
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            toggleBtns.forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            currentPeriod = e.target.getAttribute('data-period');
+            updateCalculator();
+        });
+    });
+    
+    // Initial run
+    updateCalculator();
 }

@@ -372,6 +372,78 @@
     </div>
   </section>
 
+  <!-- ========== REVENUE CALCULATOR ========== -->
+  <section class="calculator-section" id="calculator">
+    <div class="container">
+      <div class="calculator-wrapper animate-on-scroll">
+        <div class="calculator-header">
+          <span class="calculator-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            Revenue Loss Calculator
+          </span>
+          <h2 class="section-title">How Much Are Missed Calls <span class="text-gradient">Costing Your Business?</span></h2>
+        </div>
+        
+        <div class="calculator-card">
+          <div class="calc-inputs">
+            
+            <div class="calc-group">
+              <div class="calc-group-header">
+                <span class="calc-label">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91"></path><line x1="22" y1="2" x2="16" y2="8"></line><line x1="16" y1="2" x2="22" y2="8"></line></svg>
+                  Missed Calls Per Day
+                </span>
+                <span class="calc-value" id="val-missed">5</span>
+              </div>
+              <input type="range" id="slider-missed" class="calc-slider" min="0" max="50" step="1" value="5">
+            </div>
+
+            <div class="calc-group">
+              <div class="calc-group-header">
+                <span class="calc-label">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  Calls That Convert to Customers
+                </span>
+                <span class="calc-value" id="val-convert">30%</span>
+              </div>
+              <input type="range" id="slider-convert" class="calc-slider" min="0" max="80" step="5" value="30">
+            </div>
+
+            <div class="calc-group">
+              <div class="calc-group-header">
+                <span class="calc-label">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                  Average Service Price
+                </span>
+                <span class="calc-value" id="val-price">$200</span>
+              </div>
+              <input type="range" id="slider-price" class="calc-slider" min="100" max="10000" step="100" value="200">
+            </div>
+
+            <div class="calc-toggle-group">
+              <button class="calc-toggle" data-period="Daily">Daily</button>
+              <button class="calc-toggle" data-period="Weekly">Weekly</button>
+              <button class="calc-toggle active" data-period="Monthly">Monthly</button>
+              <button class="calc-toggle" data-period="Annually">Annually</button>
+            </div>
+            
+          </div>
+
+          <div class="calc-result">
+            <span class="result-label">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+              Estimated Revenue Lost Per <span id="result-period-label">Month</span>
+            </span>
+            <div class="result-amount" id="result-amount">$9,000</div>
+            <span class="result-subtext" id="result-subtext">That's 150 missed calls per month</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ========== CTA ========== -->
   <section class="cta-section" id="cta">
     <div class="container">
