@@ -12,6 +12,10 @@
     content="AI receptionists, patient acquisition, and workflow automation built for healthcare clinics and practices." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/png" href="/PolymathicsDesign2.png" />
+  
+  <!-- Calendly link widget stylesheet -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -35,7 +39,7 @@
         <li><a href="#process">Process</a></li>
         <li><a href="#about">About</a></li>
       </ul>
-      <a href="#cta" class="nav-cta">Book a Call</a>
+      <button class="nav-cta calendly-trigger">Book a Call</button>
       <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -61,7 +65,7 @@
         can focus on patient care, not admin.
       </p>
       <div class="hero-ctas animate-on-scroll">
-        <a href="#cta" class="btn btn-primary">Book a Free Consultation</a>
+        <button class="btn btn-primary calendly-trigger">Book a Free Consultation</button>
         <a href="#services" class="btn btn-ghost">See Our Services</a>
       </div>
     </div>
@@ -454,7 +458,7 @@
         <p class="cta-text">Book a free 30-minute practice audit. We'll map your patient journey, identify the biggest
           automation opportunities, and show you how AI can grow your revenue while reducing admin overhead.</p>
         <div class="cta-actions">
-          <a href="mailto:dagfarias@polymathicsai.com" class="btn btn-primary btn-lg">Book a Free Practice Audit</a>
+          <button class="btn btn-primary btn-lg calendly-trigger">Book a Free Practice Audit</button>
           <a href="mailto:dagfarias@polymathicsai.com" class="btn btn-ghost btn-lg">dagfarias@polymathicsai.com</a>
         </div>
       </div>
@@ -506,6 +510,8 @@
   </footer>
 
 
+  <!-- Calendly link widget script -->
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
   <script type="module" src="/scripts/main.js"></script>
 </body>
 
