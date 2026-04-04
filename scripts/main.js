@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initCounters();
     initCalculator();
+    initCalendly();
 });
 
 // ---------- Scroll Animations (Intersection Observer) ----------
@@ -131,6 +132,24 @@ function animateCounter(el, target) {
     }
 
     requestAnimationFrame(update);
+}
+
+// ---------- Calendly Integration ----------
+function initCalendly() {
+    const defaultCalendlyUrl = 'https://calendly.com/dagfarias-polymathicsai/polymathics-ai-demo'; 
+    
+    document.querySelectorAll('.calendly-trigger').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (window.Calendly) {
+                window.Calendly.initPopupWidget({ url: defaultCalendlyUrl });
+            } else {
+                console.warn('Calendly script not loaded yet.');
+                // Fallback in case the script fails to load or is blocked
+                window.open(defaultCalendlyUrl, '_blank');
+            }
+        });
+    });
 }
 
 // ---------- Revenue Calculator ----------
