@@ -205,7 +205,7 @@ function initCalculator() {
         
         // Animate or set amount
         resultAmount.textContent = '$' + totalLoss.toLocaleString('en-US', {maximumFractionDigits: 0});
-        resultSubtext.textContent = `That's ${totalMissedInPeriod.toLocaleString()} missed calls per ${currentPeriod.toLowerCase()}`;
+        resultSubtext.textContent = `Based on ${totalMissedInPeriod.toLocaleString()} missed opportunities per ${currentPeriod.toLowerCase()}`;
     }
     
     function updateSliderFill(slider) {
