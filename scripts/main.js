@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initNavbar();
     initMobileMenu();
+    initMegaMenu();
     initSmoothScroll();
     initCounters();
     initCalculator();
@@ -56,20 +57,95 @@ function initNavbar() {
 function initMobileMenu() {
     const hamburger = document.getElementById('navHamburger');
     const navLinks = document.getElementById('navLinks');
+    if (!hamburger || !navLinks) return;
 
     hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('open');
-        document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+        const open = navLinks.classList.toggle('open');
+        hamburger.classList.toggle('active', open);
+        hamburger.setAttribute('aria-expanded', String(open));
+        document.body.style.overflow = open ? 'hidden' : '';
+        if (!open) closeAllMega();
     });
 
-    // Close menu on link click
     navLinks.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
             navLinks.classList.remove('open');
             document.body.style.overflow = '';
+            closeAllMega();
         });
+    });
+}
+
+// ---------- Mega Menu (desktop hover + mobile accordion + a11y) ----------
+function initMegaMenu() {
+    const items = document.querySelectorAll('.nav-item.has-mega');
+    if (!items.length) return;
+
+    const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+    let hoverTimeout;
+
+    items.forEach((item) => {
+        const trigger = item.querySelector('.nav-trigger');
+        if (!trigger) return;
+
+        const open = () => {
+            items.forEach((other) => {
+                if (other !== item) {
+                    other.classList.remove('is-open');
+                    const otherTrigger = other.querySelector('.nav-trigger');
+                    if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+                }
+            });
+            item.classList.add('is-open');
+            trigger.setAttribute('aria-expanded', 'true');
+        };
+
+        const close = () => {
+            item.classList.remove('is-open');
+            trigger.setAttribute('aria-expanded', 'false');
+        };
+
+        item.addEventListener('mouseenter', () => {
+            if (isMobile()) return;
+            clearTimeout(hoverTimeout);
+            open();
+        });
+
+        item.addEventListener('mouseleave', () => {
+            if (isMobile()) return;
+            hoverTimeout = setTimeout(close, 150);
+        });
+
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (item.classList.contains('is-open')) {
+                close();
+            } else {
+                open();
+            }
+        });
+
+        trigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') close();
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-item.has-mega')) closeAllMega();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAllMega();
+    });
+}
+
+function closeAllMega() {
+    document.querySelectorAll('.nav-item.has-mega').forEach((item) => {
+        item.classList.remove('is-open');
+        const trigger = item.querySelector('.nav-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
     });
 }
 
