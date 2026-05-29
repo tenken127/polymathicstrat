@@ -10,8 +10,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        strategies: resolve(__dirname, 'strategies.html'),
-        trades: resolve(__dirname, 'trades.html'),
         leadReactivation: resolve(__dirname, 'pages/lead-reactivation.html'),
         reputation: resolve(__dirname, 'pages/reputation-management.html'),
         websiteOpt: resolve(__dirname, 'pages/website-optimization.html'),

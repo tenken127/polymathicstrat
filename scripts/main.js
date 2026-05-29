@@ -2,8 +2,11 @@
    POLYMATHICS — Main JavaScript
    ============================================ */
 
+import { initLayout } from './layout.js';
+
 // ---------- DOM Ready ----------
 document.addEventListener('DOMContentLoaded', () => {
+    initLayout();
     initScrollAnimations();
     initNavbar();
     initMobileMenu();
@@ -12,7 +15,38 @@ document.addEventListener('DOMContentLoaded', () => {
     initCounters();
     initCalculator();
     initCalendly();
+    initContactForm();
 });
+
+// ---------- Contact Form (mailto compose, no backend required) ----------
+function initContactForm() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    const note = document.getElementById('contactFormNote');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+            note.textContent = 'Please fill in your name, a valid email, and a message.';
+            note.className = 'form-note is-error';
+            form.reportValidity();
+            return;
+        }
+
+        const data = new FormData(form);
+        const name = data.get('name');
+        const email = data.get('email');
+        const practice = data.get('practice') || 'N/A';
+        const message = data.get('message');
+
+        const subject = `New inquiry from ${name}${practice !== 'N/A' ? ` (${practice})` : ''}`;
+        const body = `Name: ${name}\nEmail: ${email}\nPractice: ${practice}\n\n${message}`;
+        window.location.href = `mailto:dagfarias@polymathicsai.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        note.textContent = 'Opening your email client… if nothing happens, email us directly at dagfarias@polymathicsai.com.';
+        note.className = 'form-note is-success';
+    });
+}
 
 // ---------- Scroll Animations (Intersection Observer) ----------
 function initScrollAnimations() {
